@@ -1,0 +1,9 @@
+en:
+  usercp:
+    triggers:
+      usage:
+        ifttt_setup_info: For information on how to setup IFTTT for RemoteHue, {click here}.
+        tags_secret: The URL is secret! If you give these to someone else, they can activate this trigger whenever they want.
+
+        api_info: "Send a HTTP POST to:"
+        api_info_it: And that's it! The trigger will be activated. This is handy if you want to hook your Hue lights into a third party application that offers HTTP integration.

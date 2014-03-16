@@ -1,0 +1,104 @@
+@import "compass/utilities/sprites/base"
+
+$site_logos: sprite-map("icons/site-*.png")
+
+.remotehue
+  display: inline-block
+  vertical-align: middle
+
+  &.size-16
+    height: 16px
+    width: 16px
+  &.size-28
+    height: 28px
+    width: 28px
+  &.size-32
+    height: 32px
+    width: 32px
+  &.size-64
+    height: 64px
+    width: 64px
+  &.size-128
+    height: 128px
+    width: 128px
+
+.remotehue
+  &.size-16
+    background: sprite($site_logos, "site-16") no-repeat
+  &.size-28
+    background: sprite($site_logos, "site-28") no-repeat
+  &.size-32
+    background: sprite($site_logos, "site-32") no-repeat
+  &.size-64
+    background: sprite($site_logos, "site-64") no-repeat
+  &.size-128
+    background: sprite($site_logos, "site-128") no-repeat
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-moz-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2)
+    &.size-16
+      background: sprite($site_logos, "site-32") no-repeat
+    &.size-28
+      background: sprite($site_logos, "site-56") no-repeat
+    &.size-32
+      background: sprite($site_logos, "site-64") no-repeat
+    &.size-64
+      background: sprite($site_logos, "site-128") no-repeat
+    &.size-128
+      background: sprite($site_logos, "site-256") no-repeat
+
+
+// Login logos
+$site_icons: sprite-map("logos/*.png")
+
+.google, .facebook
+  display: inline-block
+  vertical-align: middle
+
+  &.bottom
+    vertical-align: bottom
+
+  &.size-16
+    height: 16px
+    width: 16px
+
+  &.size-19
+    height: 19px
+    width: 19px
+
+  &.size-24
+    height: 24px
+    width: 24px
+
+  &.size-48
+    height: 48px
+    width: 48px
+
+p
+  .google, .facebook
+    vertical-align: top
+
+.google
+  &.size-16
+    background: sprite($site_icons, "google-16x16") no-repeat
+
+  &.size-24, &.size-19
+    background: sprite($site_icons, "google-24x24") no-repeat
+
+  &.size-32
+    background: sprite($site_icons, "google-32x32") no-repeat
+
+  &.size-48
+    background: sprite($site_icons, "google-48x48") no-repeat
+
+.facebook
+  &.size-16
+    background: sprite($site_icons, "facebook-16x16") no-repeat
+
+  &.size-24, &.size-19
+    background: sprite($site_icons, "facebook-24x24") no-repeat
+
+  &.size-32
+    background: sprite($site_icons, "facebook-32x32") no-repeat
+
+  &.size-48
+    background: sprite($site_icons, "facebook-48x48") no-repeat

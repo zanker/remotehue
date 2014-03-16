@@ -1,0 +1,144 @@
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins.less";
+
+body {
+  background: @bodyBackground;
+  background-image: asset-url("noise.png");
+}
+
+#error-list {
+  margin-bottom: 24px;
+}
+
+.select-xlarge {
+  width: 270px;
+  height: 125px !important;
+}
+
+.navbar-inner {
+  .border-radius(0);
+}
+
+.navbar .container {
+  #grid > .core > .span(@gridColumns);
+
+  a:focus {
+    outline: none;
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+.input-full {
+  width: 96%;
+}
+
+.wrapper .navbar .navbar-inner .container .brand {
+  padding-top: 6px;
+  padding-bottom: 5px;
+
+  span {
+    vertical-align: middle;
+  }
+}
+
+h3.header {
+  margin-bottom: 12px;
+}
+
+.center {
+  text-align: center !important;
+}
+
+.push-bottom {
+  margin-bottom: 24px !important;
+}
+
+#schedule_days {
+  width: 450px;
+
+  input {
+    margin-top: 5px;
+  }
+
+  .day {
+    display: inline-block;
+    width: 85px;
+  }
+}
+
+.wrapper {
+  margin-bottom: -40px;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}
+
+.push {
+  height: 60px;
+}
+
+footer {
+  height: 40px;
+  margin-bottom: 4px;
+
+  p, a, span {
+    line-height: 36px;
+    vertical-align: bottom;
+  }
+
+  p, ul {
+    margin-bottom: 0;
+  }
+}
+
+footer li {
+  float: left;
+  margin-left: 14px;
+}
+
+.row-header {
+  margin-bottom: @baseFontSize;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.hidden {
+  display: none;
+}
+
+.nopad {
+  padding: 4px 0 0 0;
+}
+
+ul.simple {
+  margin: 0;
+
+  li {
+    padding: 2px 0 2px 0;
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.btn.square {
+  padding: 2px;
+  height: 14px;
+}
+
+// Opera
+body:before {
+  content:"";
+  height:100%;
+  float:left;
+  width:0;
+  margin-top:-32767px;
+}

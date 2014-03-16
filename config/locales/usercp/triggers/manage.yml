@@ -1,0 +1,33 @@
+en:
+  usercp:
+    triggers:
+      manage:
+        add_a_trigger: Add a Trigger
+        editing_trigger: Editing Trigger %{name}
+        flash_lights: Flash Lights
+        run_scene: Run Scene
+        lights_off: Turn Lights Off
+        lights_on: Turn Lights On
+        lights: Lights
+        groups: Groups
+        once: Once
+        duration: Duration
+        color_bri: Color & Brightness
+        create: Create
+        update: Update
+        creating: Creating...
+        updating: Updating...
+        name: Name
+        flash_seconds: "for %{seconds} seconds"
+        after_seconds: "after %{seconds} seconds"
+        after_minutes: "after %{minutes} minutes"
+        no_triggers_found: None Found
+        secondary_trigger: Additional Trigger to Run
+        dont_run_secondary: None
+        secondary_trigger_desc: Which trigger to run after {{name}}.
+        secondary_delay: Seconds to Wait
+        secondary_delay_desc: How many seconds to wait until {{name}} runs.
+        this_one: this one
+        only_run_on_api_mailgun: Secondary triggers only activate if {{name}} is activated through IFTTT or the API. A secondary trigger cannot activate another secondary trigger as well.
+        transitiontime: Transition Time
+        transitiontime_desc: Gradually changes the lights color/brightness

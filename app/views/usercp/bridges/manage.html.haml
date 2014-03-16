@@ -1,0 +1,112 @@
+.row
+  .span12
+    %h3.header= @bridge.new_record? ? t(".add_a_bridge") : t(".editing_bridge", :name => @bridge.name)
+
+.row
+  .span12
+    #error-list
+
+
+  .span12#step1
+    %h4= t(".step_1")
+    = form_for @bridge, :url => {:action => @bridge.new_record? ? :create : :update}, :html => {:class => "form-horizontal"} do |f|
+      %p= t(".bridge_local_net")
+
+      .control-group
+        = f.label(:local_ip, :class => "control-label")
+        .controls
+          = f.text_field(:local_ip, :placeholder => "192.168.1.100", :value => @bridge.local_ip_text, :class => "input-medium")
+          %span.help-inline
+
+      - if @bridge.new_record?
+        = f.hidden_field(:api_key)
+      - else
+        .control-group
+          = f.label(:api_key, :class => "control-label")
+          .controls
+            = f.text_field(:api_key, :disabled => true, :class => "input-xlarge")
+
+      .control-group
+        = f.label(:status, :class => "control-label")
+        .controls
+          - if @bridge.new_record? or @bridge.status == Bridge::UNAUTHORIZED
+            %p.text-error.lead#bridge-status= t(".authorization_required")
+          - elsif @bridge.status == Bridge::ACTIVE
+            %p.text-success.lead#bridge-status= t(".authorized")
+          - elsif @bridge.status == Bridge::OFFLINE
+            %p.text-error.lead#bridge-status= t(".offline")
+          - else
+            %p.text-error.lead#bridge-status= t(".unknown")
+
+      %input.btn.btn-success{:type => :submit, :value => t(".next"), "data-loading-text" => t(".checking"), "data-saving-text" => t(".saving")}
+
+  .span12#step2.hidden
+    %h4= t(".step_2")
+    = form_tag(@bridge.new_record? ? meethue_login_usercp_bridges_path : meethue_login_usercp_bridges_path(:id => @bridge._id), :class => "form-horizontal", "data-meethue-check" => meethue_check_usercp_bridge_path(@bridge._id)) do
+      - unless @bridge.new_record?
+        .status
+          %p
+            %strong.text-success= t(".checking_meethue")
+
+      .login{:class => !@bridge.new_record? ? :hidden : nil}
+        - if @bridge.new_record?
+          %p
+            - if current_user.bridges.count > 1
+              %span.text-error= t(".multi_meethue_account")
+            - else
+              %strong= t(".password_not_stored")
+          %p
+            %strong.text-error= t(".only_enter_meethue")
+
+        - else
+          %p
+            %strong.text-error= t(".meethue_invalid_1")
+          %p
+            %strong= t(".meethue_invalid_2")
+
+        .control-group
+          = label_tag(:email, t(".meethue_email"), :class => "control-label")
+          .controls
+            = text_field_tag(:email, current_user.email, :placeholder => "john.doe@gmail.com")
+            %span.help-inline
+
+        .control-group
+          = label_tag(:password, t(".meethue_password"), :class => "control-label")
+          .controls
+            = password_field_tag(:password)
+            %span.help-inline
+
+      %input.btn.btn-success{:type => :submit, :value => t(".save"), "data-loading-text" => t(".authenticating")}
+
+- if current_user.bridges.count == 0
+  #meethue-login.modal.hidden
+    .modal-header
+      %h3.text-error= t(".meethue_login_required")
+    .modal-body
+      %p
+        %strong= t(".meethue_login_1")
+      %p
+        = t(".meethue_login_2")
+      %p
+        = t(".meethue_login_3")
+      %p
+        %strong.text-error= t(".meethue_login_4")
+    .modal-footer
+      %a.btn.pull-left{:href => "/"}= t("js.cancel")
+      %a.btn.pull-right.btn-success{:href => "#", "data-dismiss" => "modal"}= t("js.ok")
+
+#setup-portal.modal.hidden
+  .modal-header
+    %h3.text-error= t(".bridge_no_portal")
+  .modal-body
+    .setting-up
+      %p= linkify_text(t(".bridge_setup_portal"), [:blank, usercp_help_meethue_path])
+      %p= t(".bridge_setup_portal_2")
+    .not-setup.hidden
+      %p.text-error= t(".bridge_setup_not_yet")
+      %p= t(".bridge_setup_not_yet_2")
+
+    %p= linkify_text(t(".bridge_setup_portal_support"), [:email, CONFIG[:contact][:email]])
+  .modal-footer
+    %a.btn.pull-left{:href => "#{faq_index_path}#meethue"}= t("js.cancel")
+    %a.btn.pull-right.btn-success{:href => "#", "data-loading-text" => t(".checking")}= t(".portal_setup")

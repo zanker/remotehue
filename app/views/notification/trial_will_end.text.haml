@@ -1,0 +1,5 @@
+Hey, we're just letting you know that your #{t("js.sub_plans.#{@user.subscription.plan}")} trial will be ending on #{@user.with_time_zone(@user.subscription.trial_end).to_s(:date)}.
+= "\n"
+You will be automatically billed on #{@user.with_time_zone(@user.subscription.trial_end).to_s(:date)} to your #{@user.stripe_card["type"]} ending in #{@user.stripe_card["last4"]} (exp #{@user.stripe_card["exp_month"]}/#{@user.stripe_card["exp_year"]}).
+= "\n"
+If you need to make any changes before the trial ends, visit the billing page at #{billing_url}.

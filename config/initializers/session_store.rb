@@ -1,0 +1,1 @@
+Remotehue::Application.config.session_store :cookie_store, :key => '_remotehue_session', :httponly => true

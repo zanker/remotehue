@@ -1,0 +1,137 @@
+en:
+  contact_support_anytime: Feel free to {contact us} if you have any questions.
+  yes: "Yes"
+  no: "No"
+  instant: Instant
+  remotehue: Remote Hue
+
+  sub_plans:
+    free: Free
+    starter: Starter
+    premium: Premium
+
+  seconds:
+    one: 1 second
+    other: "%{count} seconds"
+
+  minutes:
+    one: 1 minute
+    other: "%{count} minutes"
+
+  providers:
+    google: Google
+    facebook: Facebook
+
+  page_errors:
+    must_login: You need to login before you can access that page.
+    logged_in: You are already logged in!
+
+
+  titles:
+    login: Login
+    home: IFTTT & Scheduler for Hue
+    bridges: Bridge Management
+    triggers: Trigger Management
+    schedules: Schedule Management
+    subscription_plans: Subscription Plans
+    adding_trigger: Create a Trigger
+    editing_trigger: Editing %{name}
+    adding_bridge: Create a Bridge
+    editing_bridge: Editing %{name}
+    adding_schedule: Create a Schedule
+    editing_schedule: Editing %{name}
+    help_ifttt: IFTTT Setup
+    "404": Page Not Found (404)
+    "500": Server Error (500)
+    account_management: Account Management
+
+  devices:
+    one: 1 device
+    other: "%{count} devices"
+
+  lights:
+    one: 1 light
+    other: "%{count} lights"
+
+  trigger_types:
+    "Trigger::Off": Lights Off
+    "Trigger::On": Lights On
+    "Trigger::Flash": Flash Lights
+    "Trigger::Scene": Apply Scene
+
+  js:
+    dismiss: Dismiss
+    close: Close
+    ok: Ok
+    form_errors: Errors
+    contact_support: If you continue to have issues, you can contact us at {{email}}.
+    delete: Delete
+    cancel: Cancel
+    loading: Loading...
+
+    request_error:
+      "500":
+        title: Critical Error
+        desc_1: Sorry, we had a critical error while loading your request.
+        desc_2: We've been notified about this and will get it fixed soon. Contact us at {{email}} if you have any further questions.
+      load:
+        title: Load Error
+        desc_1: Sorry, while loading your data we ran into a critical error.
+        desc_2: Please contact {{email}} and will quickly get it sorted out.
+
+  mongo_mapper:
+    attributes:
+      user:
+        timezone: Time Zone
+      bridge:
+        local_ip: Bridge IP
+        mac: MAC Address
+        bridge: Bridge
+      schedule:
+        triggers: Schedules
+        trigger_ids: Triggers
+        end_at: End date
+        start_at: Start date
+        days: Days to run
+        run_hour: Run At
+        run_unless: Run Unless
+      trigger/flash:
+        bridges: Lights
+        color: Lights
+      trigger/on:
+        bridges: Lights
+      trigger/off:
+        bridges: Lights
+        color: Lights
+
+    errors:
+      models:
+        bridge:
+          attributes:
+            bridge:
+              getbridge: could not be loaded from MeetHue
+        trigger/flash:
+          attributes:
+            bridges:
+              at_least: cannot be empty
+            color:
+              cant_be_off: cannot be turned off with this trigger
+              cant_be_off_multi: cannot be set to off when flashing more than once
+        trigger/on:
+          attributes:
+            bridges:
+              at_least: cannot be empty
+            color:
+              cant_be_off: cannot be turned off with this trigger
+        trigger/off:
+          attributes:
+            bridges:
+              at_least: cannot be empty
+        schedule:
+          attributes:
+            triggers:
+              too_many: "cannot have more than %{limit} triggers associated"
+            end_at:
+              before_start: "cannot be before start date"
+            days:
+              at_least_one: cannot be left blank

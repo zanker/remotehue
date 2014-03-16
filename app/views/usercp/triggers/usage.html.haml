@@ -1,0 +1,12 @@
+%p
+  %strong= linkify_text(t(".ifttt_setup_info"), usercp_help_ifttt_path(@trigger._id))
+
+%p.text-error= t(".tags_secret")
+
+%p
+  %strong= t(".api_info")
+
+%input.input-full{:type => :text, :value => api_trigger_activate_url(current_user._id, @trigger.secret)}
+
+%p
+  = t(".api_info_it")

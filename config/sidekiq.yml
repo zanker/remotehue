@@ -1,0 +1,9 @@
+---
+:concurrency: 6
+:pidfile:  /var/www/vhosts/remotehue/shared/pids/sidekiq.pid
+:logfile: /var/www/vhosts/remotehue/shared/log/sidekiq.log
+:queues:
+  - [critical, 10]
+  - [high, 3]
+  - [medium, 2]
+  - [low, 1]

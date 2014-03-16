@@ -1,0 +1,163 @@
+.row
+  .span12
+    %h3.header= @schedule.new_record? ? t(".add_a_schedule") : t(".editing_schedule", :name => @schedule.name)
+
+.row
+  .span12
+    #error-list
+    = form_for @schedule, :url => {:action => @schedule.new_record? ? :create : :update}, :html => {:class => "form-horizontal"} do |f|
+      .control-group
+        = f.label(:enabled, :class => "control-label")
+        .controls
+          = f.select(:enabled, [[t("yes"), true], [t("no"), false]], {}, {:class => "input-mini"})
+          %span.help-inline= t(".enabled_desc")
+
+      .control-group
+        = f.label(:name, :class => "control-label")
+        .controls
+          = f.text_field(:name, :placeholder => "Porch lights", :class => "input-medium")
+          %span.help-inline
+
+      .control-group
+        = f.label(:trigger_ids, t("mongo_mapper.attributes.schedule.trigger_ids"), :class => "control-label")
+        .controls
+          - if current_user.triggers.exists?
+            = f.select(:trigger_ids, trigger_list, {:class => "input-medium"}, :multiple => true)
+          - else
+            = f.select(:trigger_ids, [[t(".none_found"), ""]], {:class => "input-medium"}, :disabled => true, :multiple => true)
+
+          %span.help-inline#trigger-desc= t(".triggers_desc", :limit => CONFIG[:limit][:schedule_triggers])
+          %span.help-inline#trigger-limit{"data-limit" => CONFIG[:limit][:schedule_triggers]}
+            %span.text-error= t(".triggers_limit", :limit => CONFIG[:limit][:schedule_triggers])
+
+      .control-group.push-bottom
+        = f.label(:days, t("mongero_mapper.attributes.schedule.days"), :class => "control-label")
+        .controls
+          #schedule_days
+            %label.toggle-all
+              %label.checkbox
+                %input{:type => :checkbox}= t(".toggle_all")
+            - (1..7).each do |day|
+              %label.checkbox.day
+                %input{:type => :checkbox, :name => "schedule[days]", :value => day, :checked => @schedule.days.include?(day)}
+                = Date::DAYNAMES[day == 7 ? 0 : day]
+          %span.help-block= t(".days_desc")
+
+      .tabbable.tabs-left
+        %ul.nav.nav-tabs
+          %li{:class => (@schedule.new_record? || @schedule.mode == Schedule::TIME) ? :active : nil}= link_to(t(".time"), "#time")
+          %li{:class => @schedule.mode == Schedule::SUNRISE ? :active : nil}= link_to(t(".sunrise"), "#sunrise")
+          %li{:class => @schedule.mode == Schedule::SUNSET ? :active : nil}= link_to(t(".sunset"), "#sunset")
+
+        .tab-content
+          .tab-pane#time
+            #current-time{"data-time-offset" => current_user.with_time_zone.utc_offset, "data-time-format" => current_user.time_format(true), "data-time-zone" => current_user.with_time_zone.zone}
+              %p
+                = linkify_text(t(".currently_time"), edit_usercp_setting_path)
+
+            .control-group
+              = f.label(:run_hour, t("mongo_mapper.attributes.schedule.run_hour"), :class => "control-label")
+              .controls
+                - if current_user.time_mode == User::TWELVE
+                  = f.text_field(:run_hour, :placeholder => "8:23 AM", :class => "input-mini")
+                  %span.help-inline= t(".run_hour_12_desc")
+                - else
+                  = f.text_field(:run_hour, :placeholder => "20:21", :class => "input-mini")
+                  %span.help-inline= t(".run_hour_24_desc")
+
+            -#.control-group
+            -#  = label_tag("schedule_time[run_unless]", t("mongo_mapper.attributes.schedule.run_unless"), :class => "control-label")
+            -#  .controls
+            -#    = select_tag("schedule_time[run_unless]", options_for_select([[t(".always_run"), Schedule::NONE], [t(".sun_is_down"), Schedule::SUNDOWN], [t(".sun_is_up"), Schedule::SUNUP]], :selected => @schedule.run_unless), :class => "input-medium")
+            -#    %span.help-inline= t(".run_unless_desc")
+
+          .tab-pane#sunrise
+            - unless @has_location
+              %p.warning
+                %strong.text-error= t(".sunrise_requires_location")
+
+            .fields{:class => @has_location ? nil : :hidden}
+              .time{"data-time" => current_user.solar_event_at(:sunrise)}
+                %p
+                  = linkify_text(t(".sunrise_at"), edit_usercp_setting_path)
+
+              .control-group
+                = label_tag("schedule_sunrise[sun_offset]", t(".sunrise_offset"), :class => "control-label")
+                .controls
+                  = select_tag("schedule_sunrise[sun_offset]", options_for_select(solar_offset_options(:sunrise), :selected => @schedule.sun_offset), :class => "input-large")
+                  %span.help-inline= t(".sunrise_offset_desc")
+
+            -#.control-group
+            -#  = label_tag("schedule_sunrise[run_unless]", t("mongo_mapper.attributes.schedule.run_unless"), :class => "control-label")
+            -#  .controls
+            -#    = select_tag("schedule_sunrise[run_unless]", options_for_select([[t(".always_run"), Schedule::NONE], [t(".sun_is_down"), Schedule::SUNDOWN], [t(".sun_is_up"), Schedule::SUNUP]], :selected => @schedule.run_unless), :class => "input-medium")
+            -#    %span.help-inline= t(".run_unless_desc")
+
+
+          .tab-pane#sunset
+            - unless @has_location
+              %p.warning
+                %strong.text-error= t(".sunrise_requires_location")
+
+            .fields{:class => @has_location ? nil : :hidden}
+              .time{"data-time" => current_user.solar_event_at(:sunset)}
+                %p
+                  = linkify_text(t(".sunset_at"), edit_usercp_setting_path)
+
+              .control-group
+                = label_tag("schedule_sunset[sun_offset]", t(".sunset_offset"), :class => "control-label")
+                .controls
+                  = select_tag("schedule_sunset[sun_offset]", options_for_select(solar_offset_options(:sunset), :selected => @schedule.sun_offset), :class => "input-large")
+                  %span.help-inline= t(".sunset_offset_desc")
+
+            -#.control-group
+            -#  = label_tag("schedule_sunset[run_unless]", t("mongo_mapper.attributes.schedule.run_unless"), :class => "control-label")
+            -#  .controls
+            -#    = select_tag("schedule_sunset[run_unless]", options_for_select([[t(".always_run"), Schedule::NONE], [t(".sun_is_down"), Schedule::SUNDOWN], [t(".sun_is_up"), Schedule::SUNUP]], :selected => @schedule.run_unless), :class => "input-medium")
+            -#    %span.help-inline= t(".run_unless_desc")
+
+      %input.btn.btn-success{:type => :submit, :value => @schedule.new_record? ? t(".create") : t(".update"), "data-loading-text" => @schedule.new_record? ? t(".creating") : t(".updating")}
+
+- if current_user.flags["hlcsched"]
+  - current_user.unset("flags.hlcsched")
+  .modal#hlc
+    .modal-header
+      %h3= t(".hlc.vs_remotehue")
+    .modal-body
+      %p
+        %strong= t(".hlc.desc_1")
+      %ol
+        - (2..4).each do |i|
+          %li= t(".hlc.desc_#{i}")
+
+      %p= t(".hlc.desc_5")
+      %p
+        %strong= linkify_text(t("contact_support_anytime"), [:email, CONFIG[:contact][:email]])
+    .modal-footer
+      %a.btn.pull-left.btn-success{:href => "#", "data-dismiss" => "modal"}= t("js.dismiss")
+
+- unless @has_location
+  - content_for :head do
+    %script{:src => "https://maps.googleapis.com/maps/api/js?v=3.10&sensor=false"}
+
+
+  = form_tag(inline_location_usercp_setting_path, :method => "PUT", :id => "set-location") do
+    .modal.hidden{"data-solar-url" => solar_events_usercp_setting_path}
+      .modal-header
+        %h3= t(".location_required")
+      .modal-body
+        %p
+          %strong= t(".set_your_location")
+        #address
+          %input.input-xlarge{:type => "text", :value => t(".new_york_city"), :placeholder => t(".new_york_city")}
+          %input.btn.btn-medium.btn-primary{:type => :button, :value => t(".search"), "data-loading-text" => t(".searching")}
+        #map
+
+
+        #solar-time{"data-text" => t(".solar_text")}
+          = image_tag("loading.gif")
+          %span= t(".loading_sunrise_sunset")
+
+      .modal-footer
+        %a.btn.pull-left{:href => "#", "data-dismiss" => "modal"}= t("js.dismiss")
+        %input.btn.btn-success.pull-right{:type => :submit, :value => t(".save"), "data-loading-text" => t(".saving")}

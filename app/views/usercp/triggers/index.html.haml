@@ -1,0 +1,59 @@
+.row
+  .span12
+    %h3.header= t(".triggers_index")
+
+- if @triggers.empty?
+  .row
+    .span12
+      .alert.alert-block
+        .close{"data-dismiss" => :alert} x
+        %h4= t(".no_triggers_found")
+        = linkify_text(t(".add_a_trigger"), new_usercp_trigger_path)
+
+- else
+  .row
+    .span12
+      %table.table.table-hover.table-striped.table-bordered
+        %thead
+          %tr
+            %th= t(".name")
+            %th.center= t(".type")
+            %th.center= t(".ifttt_setup")
+            %th.center= t(".api_setup")
+            %th.center= t(".history")
+            %th.center= t(".edit")
+            %th.center= t(".delete")
+
+        %tbody
+          - @triggers.each do |trigger|
+            %tr
+              %td= trigger.name
+              %td.center= t("trigger_types.#{trigger._type}")
+              %td.center= link_to(t(".ifttt_setup"), usercp_help_ifttt_path(trigger._id), :class => "btn btn-primary btn-mini")
+              %td.center= link_to(t(".api_setup"), usage_usercp_trigger_path(trigger._id), :class => "btn btn-mini setup", "data-regenerate" => regenerate_usercp_trigger_path(trigger._id))
+              %td.center= link_to(t(".history"), history_usercp_trigger_path(trigger._id), :class => "btn btn-inverse btn-mini history")
+              %td.center= link_to(t(".edit"), edit_usercp_trigger_path(trigger._id), :class => "btn btn-success btn-mini")
+              %td.center= link_to(t(".delete"), usercp_trigger_path(trigger._id), :class => "btn btn-danger btn-mini delete")
+
+#trigger-setup.modal.hidden
+  .modal-header
+    %h3
+      = t(".api_usage")
+      .close{"data-dismiss" => "modal"} x
+  .modal-body
+    = image_tag("loading.gif")
+    %strong= t("js.loading")
+  .modal-footer
+    %a.btn.pull-left.btn{:href => "#", "data-dismiss" => "modal"}= t("js.close")
+    %a.btn.pull-right.btn-danger{:href => "#", "data-loading-text" => t(".regenerating")}= t(".regenerate")
+
+#trigger-history.modal.hidden
+  .modal-header
+    %h3
+      = t(".last_triggers", :count => CONFIG[:limit][:trigger_history])
+      .close{"data-dismiss" => "modal"} x
+  .modal-body
+    = image_tag("loading.gif")
+    %strong= t("js.loading")
+  .modal-footer
+    %a.btn.pull-left.btn{:href => "#", "data-dismiss" => "modal"}= t("js.close")

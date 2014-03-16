@@ -1,0 +1,50 @@
+.row
+  .span12
+    %p.lead= t(".unlock_full")
+    %p.lead= linkify_text(t(".ifttt_scheduler"), "https://ifttt.com")
+
+.row
+  .span12
+    .well.well-small
+      .media
+        .remotehue.size-64.media-object
+
+        .media-body
+          %h4.media-heading= t(".remote.title")
+          %p= t(".remote.access")
+
+.row
+  .span12
+    .well.well-small
+      .media
+        = image_tag("ifttt.png", :class => "media-object")
+
+        .media-body
+          %h4.media-heading= t(".ifttt.title")
+          %p= linkify_text(t(".ifttt.any_channel"), "https://ifttt.com")
+
+.row
+  .span12
+    .well.well-small
+      .media
+        = image_tag("icons/calendar.png", :class => "media-object")
+
+        .media-body
+          %h4.media-heading= t(".scheduler.title")
+          %p= t(".scheduler.full")
+          %p= t(".scheduler.can_do")
+
+.row
+  .span12
+    .well.well-small
+      .media
+        = image_tag("icons/api.png", :class => "media-object")
+
+        .media-body
+          %h4.media-heading= t(".api.title")
+          %p= t(".api.expand")
+
+%p.lead
+  = linkify_text(t(".plans_offered", :days => CONFIG[:subscriptions][:starter][:trial_period], :price => number_to_currency(CONFIG[:subscriptions][:starter][:monthly], :precision => 0)), subscription_path)
+
+%p= linkify_text(t(".free_offered"), new_session_path)

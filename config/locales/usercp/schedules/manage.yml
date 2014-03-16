@@ -1,0 +1,75 @@
+en:
+  usercp:
+    schedules:
+      manage:
+        add_a_schedule: Add a Schedule
+        editing_schedule: Editing Schedule %{name}
+        create: Create
+        update: Update
+        creating: Creating...
+        updating: Updating...
+        sunrise: Sunrise
+        sunset: Sunset
+        time: Time
+        triggers_desc: Pick up to %{limit} triggers to activate when the schedule runs
+        triggers_limit: "Limit reached, %{limit} triggers select"
+        enabled_desc: Whether the schedule is eligible to run
+        none_found: None Found
+        days_desc: What days of the week the schedule can run on
+        toggle_all: Toggle All
+        run_hour_12_desc: When the schedule should run
+        run_hour_24_desc: When the schedule should run
+        currently_time: It is currently [[time]], {click here} to change your time zone.
+        sunrise_at: Today the sun will rise at [[time]], {click here} to change your location.
+        sunset_at: Today the sun will set at [[time]], {click here} to change your location.
+        sunrise_requires_location: You must set your location in order to use the sunrise scheduler.
+        sunset_requires_location: You must set your location in order to use the sunset scheduler.
+        location_required: Location Required
+        set_your_location: We need to know your location in order to figure out sunrise and sunset, you can set it below.
+        new_york_city: New York City
+        search: Search
+        searching: Searching...
+        loading_sunrise_sunset: Loading sunrise and sunset...
+        solar_text: Today's sunrise is at [[sunrise]] [[zone]], sun sets at [[sunset]] [[zone]]
+        save: Save
+        saving: Saving...
+        sunset_offset: Run At
+        sunset_offset_desc: When to run the schedule
+        sunrise_offset: Run At
+        sunrise_offset_desc: When to run the schedule
+        at_sunrise: Sunrise
+        at_sunset: Sunset
+        before_sunset: "%{minutes} minutes before sunset"
+        after_sunset: "%{minutes} minutes after sunset"
+        before_sunrise: "%{minutes} minutes before sunrise"
+        after_sunrise: "%{minutes} minutes after sunrise"
+
+        before_sunset_hour:
+          one: "1 hour before sunset"
+          other: "%{count} hours before sunset"
+        after_sunset_hour:
+          one: "1 hour after sunset"
+          other: "%{count} hours after sunset"
+
+        before_sunrise_hour:
+          one: "1 hour before sunrise"
+          other: "%{count} hours before sunrise"
+        after_sunrise_hour:
+          one: "1 hour after sunrise"
+          other: "%{count} hours after sunrise"
+
+        run_unless_desc: Stops a schedule from running based on a condition
+        always_run: Always Run
+        sun_is_down: Sun is Down
+        sun_is_up: Sun is Up
+
+        schedule_created: Schedule %{name} created!
+        schedule_updated: Updated schedule %{name}!
+
+        hlc:
+          vs_remotehue: Hue Lights Controller vs Remote Hue
+          desc_1: Remote Hue's scheduler function slightly differently from Hue Lights Controller. If you didn't use HLC, you can close this window.
+          desc_2: If you want to turn your lights on at 7:00 AM and then off at 7:20 AM, you would need to create two separate schedules.
+          desc_3: Schedules are no longer offset by transition time. If you use a 5 minute transition time and want it done by 8:00 AM, your schedule should run at 7:55 AM.
+          desc_4: Rather than setting a static light color or set to be applied when the schedule runs, you now associate triggers that are ran when the schedule runs.
+          desc_5: These changes were made to minimize potential bugs and make it easier for people to manage schedules.

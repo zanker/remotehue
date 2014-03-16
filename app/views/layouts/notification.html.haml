@@ -1,0 +1,10 @@
+= yield
+%br
+%br
+\-----
+%br
+Issues? Comments? Questions? Send us an email #{mail_to(CONFIG[:contact][:email])}, or on Twitter #{link_to("@#{CONFIG[:contact][:twitter]}", "https://twitter.com/#{CONFIG[:contact][:twitter]}")}.
+- if @unsubscribable
+  %br
+  %span{:style => "font-size: 12px;"}
+    Don't want to receive these emails anymore? #{link_to("Unsubscribe", user_unsubscribe_url(:user_id => @user._id, :email_token => @user.email_token))}, no fuss.

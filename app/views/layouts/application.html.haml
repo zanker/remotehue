@@ -1,0 +1,139 @@
+!!!
+%html{:lang => :en}
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{:name => :viewport, :content => "width=device-width, initial-scale=1.0"}
+    %meta{:name => :description, :content => "Remote Hue unlocks the full potential of your Philips Hue lights"}
+    %meta{:name => :keywords, :content => "hue, ifttt, scheduling, philips, hue, philips hue, sunrise schedule, sunset schedule"}
+    %title= main_page_title
+
+    %link{:rel => "apple-touch-icon", :href => "apple-touch-icon.png"}
+    %link{:rel => "shortcut icon", :href => "/favicon.ico"}
+
+    = csrf_meta_tags
+    = stylesheet_link_tag(params[:controller] =~ /^usercp/ ? :usercp : :application, :media => "all")
+
+    = javascript_include_tag(params[:controller] =~ /^usercp/ ? :usercp : :application)
+
+    = yield :head if content_for?(:head)
+
+    - if Rails.env.production?
+      :javascript
+        (function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==
+        typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);
+        b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
+        mixpanel.init("#{CONFIG[:mixpanel]}");
+        mixpanel.identify("#{analytics_id}");
+        mixpanel.track("#{params[:controller].humanize} -> #{params[:action].humanize}");
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', '1234', '1234');
+        ga('send', 'pageview');
+
+    - else
+      :javascript
+        window.mixpanel = {track: function(){}, track_links: function() {}, register: function() {}, register_once: function() {}, register: function() {}};
+
+%body
+  .wrapper
+    .navbar
+      .navbar-inner
+        .container
+          %a.brand{:href => user_signed_in? ? usercp_bridges_path : root_path}
+            .remotehue.size-28
+            %span= t(".remotehue")
+
+          %ul.nav
+            - if user_signed_in? and params[:controller] =~ /^usercp/
+              %li.dropdown{:class => active_class("usercp/bridges")}
+                %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}
+                  = t(".bridges")
+                  %b.caret
+                %ul.dropdown-menu
+                  %li{:class => active_class("usercp/bridges", "index")}= link_to(t(".view"), usercp_bridges_path)
+                  %li{:class => active_class("usercp/bridges", "new")}= link_to(t(".add"), new_usercp_bridge_path)
+
+              %li.dropdown{:class => active_class("usercp/triggers")}
+                %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}
+                  = t(".triggers")
+                  %b.caret
+                %ul.dropdown-menu
+                  %li{:class => active_class("usercp/triggers", "index")}= link_to(t(".view"), usercp_triggers_path)
+                  %li{:class => active_class("usercp/triggers", "new")}= link_to(t(".create"), new_usercp_trigger_path)
+
+              %li.dropdown{:class => active_class("usercp/schedules")}
+                %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}
+                  = t(".schedules")
+                  %b.caret
+                %ul.dropdown-menu
+                  %li{:class => active_class("usercp/schedules", "index")}= link_to(t(".view"), usercp_schedules_path)
+                  %li{:class => active_class("usercp/schedules", "new")}= link_to(t(".create"), new_usercp_schedule_path)
+            - else
+              %li.dropdown{:class => active_class("subscriptions")}
+                %a{:href => subscription_path}= t(".subscription_plans")
+
+          %ul.nav.pull-right
+            %li= mail_to(CONFIG[:contact][:email], t(".contact"), :class => :contact_email, "data-location" => "header")
+            %li.divider-vertical
+            - if !user_signed_in?
+              %li{:class => active_class("sessions")}
+                %a#login-link{:href => new_session_path}
+                  %span= t(".login_with")
+                  - CONFIG[:oauth].each_key do |provider|
+                    %div{:class => "#{provider} size-16"}
+
+            - else
+              %li.dropdown{:class => active_class("usercp/settings")}
+                %a.dropdown-toggle{"data-toggle" => :dropdown, :href => "#"}
+                  = t(".account")
+                  %b.caret
+                %ul.dropdown-menu
+                  %li{:class => active_class("usercp/settings", "edit")}= link_to(t(".settings"), edit_usercp_setting_path)
+                  -#%li= link_to(t(".billing"), usercp_billing_path)
+                  %li.divider
+                  %li= link_to(t(".logout"), session_logout_path)
+
+    .container{:id => "#{params[:controller]}_#{params[:action]}".gsub("/", "_")}
+      - if flash[:alert]
+        .alert.alert-error
+          .close x
+          %strong= flash[:email] ? flash[:alert].gsub(CONFIG[:contact][:email], mail_to(CONFIG[:contact][:email])) : flash[:alert]
+      - elsif flash[:notice]
+        .alert.alert-info
+          .close x
+          %strong= flash[:email] ? flash[:notice].gsub(CONFIG[:contact][:email], mail_to(CONFIG[:contact][:email])) : flash[:notice]
+      - elsif flash[:success]
+        .alert.alert-success
+          .close x
+          %strong= flash[:email] ? flash[:success].gsub(CONFIG[:contact][:email], mail_to(CONFIG[:contact][:email])) : flash[:success]
+
+      - if user_signed_in?
+        %noscript
+          .alert.alert-error
+            %strong!= t(".noscript", :email => mail_to(CONFIG[:contact][:email]))
+
+      = yield
+    .push
+
+  %footer.container
+    %p.pull-left &copy; 2013 Remote Hue
+    %ul.pull-right.unstyled
+      %li= link_to(t(".twitter"), "https://twitter.com/remotehue")
+      %li
+        %span &middot;
+      %li= mail_to(CONFIG[:contact][:email], t(".contact_us"), :class => :contact_email, "data-location" => "footer")
+      %li
+        %span &middot;
+      %li= link_to(t(".terms"), terms_conditions_path)
+      %li
+        %span &middot;
+      %li= link_to(t(".privacy_policy"), privacy_policy_path)
+      %li
+        %a{:href => "http://mixpanel.com/f/partner"}
+          = image_tag("https://mixpanel.com/site_media/images/partner/badge_light.png", :alt => "Real Time Web Analytics", :width => 114, :height => 36)
+
+  :javascript
+    Remotehue.initialize();
+    if( Remotehue.PAGES['#{params[:controller]}/#{params[:action]}'] ) Remotehue.PAGES['#{params[:controller]}/#{params[:action]}']();

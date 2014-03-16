@@ -1,0 +1,69 @@
+en:
+  usercp:
+    bridges:
+      manage:
+        add_a_bridge: Adding a Bridge
+        editing_bridge: Editing Bridge %{name}
+        step_1: 1. Configuration
+        step_2: 2. MeetHue Login
+        active: Active
+        authorization_required: Authorization Required
+        offline: Offline
+        unknown: Unknown
+        authorized: Authorized
+        next: Next
+        bridge_local_net: In order to configure the Hue Bridge, it needs to be on the same network as your computer. After that, Remote Hue doesn't need it to be on the same network.
+        checking: Checking...
+        save: Save
+        saving: Saving...
+        bridge_no_portal: MeetHue setup required
+        bridge_setup_portal: Your bridge must be connected to MeetHue (run by Philips) to use Remote Hue. {Click here} for help on setting it up, it only takes a minute.
+        bridge_setup_portal_2: After, your bridge will also be able to receive software updates from Philips.
+        bridge_setup_not_yet: Your bridge isn't reporting that it's connected to MeetHue yet.
+        bridge_setup_not_yet_2: If all three blue lights on your bridge are on, you may need to wait 10-20 seconds for your bridge to register the MeetHue connection.
+        portal_setup: Done, check again
+        confirming: Confirming...
+        bridge_setup_portal_support: You can {email us} if you have any questions or issues.
+        meethue_good: You're all set! You don't need to login to MeetHue again.
+        why_meethue_login: Why do we need your MeetHue login?
+        meethue_login_required: MeetHue Login Required
+        meethue_login_1: Sorry, but currently, we need your MeetHue login to do the initial authorization to your bridge.
+        meethue_login_2: We do not store your login info and once the authorization completes, it's never used again.
+        meethue_login_3: Eventually this will become unnecessary, but for now it's the only way to offer Remote Hue without requiring a client to be run on your home network 24/7.
+        meethue_login_4: If you use the same password somewhere else, we strongly encourage you to set a temporary password for this step and then change it back after authorization completes.
+        password_not_stored: Your login info is not stored and we only use it for this authorization step. It's never used again.
+        meethue_email: MeetHue Email
+        meethue_password: MeetHue Password
+        checking_meethue: Give us a second, we're checking that your MeetHue login still works
+        meethue_invalid_1: We need you to re-authenticate to MeetHue to continue controlling your lights through this bridge.
+        meethue_invalid_2: Your password is still not stored. Once we finish re-authenticating it will not be used or stored.
+        multi_meethue_account: Currently, if you want to use multiple bridges, you need multiple MeetHue accounts. This is a limitation imposed by Philips.
+        only_enter_meethue: Only enter your MeetHue login info here!
+
+        bridge_saved: Bridge "%{name}" has been updated!
+        bridge_created: Bridge "%{name}" has been associated to Remote Hue!
+        authenticating: Authenticating...
+
+
+
+        js:
+          still:
+          enter_ip: You must enter an IP
+          still_authenticating: Still Authenticating...
+          enter_email: You must enter your MeetHue email
+          enter_password: You must enter your MeetHue password
+          bridge_not_found: Bridge Not Found
+          bridge_not_on_network: Sorry, but we couldn't find the bridge using that IP. Make sure you're on the same network.
+          bridge_unauthorized: Authorization Required
+          bridge_press_link: In order to authenticate, we need you to press the link button (the button on your bridge), then wait a second for us to confirm the authorization.
+          authorized: Authorized
+          are_you_sure: Are you sure you want to leave this page? You aren't done adding the bridge yet.
+          meethue_error: MeetHue Error
+          meethue:
+            session: We were unable to setup the session to authorize against.
+            auth: Your MeetHue login information was not correct. Please check it and try again.
+            unknown0: An unknown error occurred, please contact support with error code 0 and will get it sorted out for you.
+            unknown1: An unknown error occurred, please contact support with error code 1 and will get it sorted out for you.
+            unknown2: An unknown error occurred, please contact support with error code 2 and will get it sorted out for you.
+            unknown3: An unknown error occurred, please contact support with error code 3 and will get it sorted out for you.
+            unknown4: An unknown error occurred, please contact support with error code 4 and will get it sorted out for you.

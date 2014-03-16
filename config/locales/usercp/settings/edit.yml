@@ -1,0 +1,24 @@
+en:
+  usercp:
+    settings:
+      edit:
+        account_management: Account Management
+        settings_updated: Settings updated!
+        save: Save
+        saving: Saving...
+        name: Name
+        time_zone: Time Zone
+        time_zone_desc: What time zone you're in, used for scheduling and display
+        display_time: Time Display
+        hour_12: 12 Hours (8:00 PM)
+        hour_24: 24 Hours (20:00)
+        new_york_city: New York City
+        search: Search
+        searching: Searching...
+        loading_sunrise_sunset: Loading sunrise and sunset...
+        receive_emails: Receive Email Updates?
+        receive_emails_desc: Whether you want to receive Remote Hue email updates
+        solar_text: Today's sunrise is at [[sunrise]] [[zone]], sun sets at [[sunset]] [[zone]]
+        location: Location
+
+

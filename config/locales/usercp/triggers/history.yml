@@ -1,0 +1,27 @@
+en:
+  usercp:
+    triggers:
+      history:
+        source: Source
+        results: Results
+        created_at: Time
+        not_triggered_yet: "%{name} hasn't been triggered yet"
+        from_types:
+          "0": Email
+          "1": API
+          "2": Schedule
+          "3": Secondary Trigger
+          "4": IFTTT
+
+        result_types:
+          "0": Ok
+          "1": Missing
+          "2": Over limit
+          "3": Error
+
+        result_types_desc:
+          "0": Trigger ran without issue
+          "1": We could not find the trigger by the secret
+          "2": You have gone over your monthly trigger limit
+          "3": An error occurred while running the trigger
+

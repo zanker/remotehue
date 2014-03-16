@@ -1,0 +1,34 @@
+en:
+  subscriptions:
+    show:
+      subscriptions: Subscription Plans
+      or: or
+      login_auth: Authentication
+      login_with: Login with
+      purchase: Purchase
+      days_free: "%{days} free trial"
+      sub_desc: Subscriptions come with a %{free}. Cancel at any time, no hassle, no tricks.
+      take_a_minute: This will only take a minute, and you'll be brought to the checkout page after.
+      redirect_purchase: Before you can start a %{type} subscription, you need to login to Remote Hue first.
+
+      monthly_price: Monthly Price
+      free_excited: Free!
+      unlimited: Unlimited
+      none: None
+      hours: Hours
+      not_sure_upgrade: Not quite sure you want to upgrade?
+      subscription: Subscription
+
+      features:
+        triggers:
+          name: Monthly Triggers
+          desc: Total number of triggers allowed per month through IFTTT or schedules.
+        api:
+          name: API Support
+          desc: Integrate any application with Remote Hue through our HTTP Trigger API
+        ifttt:
+          name: IFTTT Integration
+          desc: Integrate your Hue lights with any IFTTT channel
+        schedules:
+          name: Recurring Schedules
+          desc: Setup recurring schedules, turn your lights on before you go to work and then off when you leave.

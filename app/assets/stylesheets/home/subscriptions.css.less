@@ -1,0 +1,80 @@
+#subscriptions_show {
+  .feature {
+    cursor: pointer;
+  }
+
+  .login-with {
+    span {
+      font-size: 90%;
+      font-weight: normal;
+      vertical-align: middle;
+    }
+
+    .btn {
+      padding: 4px;
+    }
+  }
+
+  table {
+    th {
+      padding-top: 16px;
+      padding-bottom: 16px;
+
+      a {
+        margin-top: 6px;
+      }
+    }
+
+    th:first-child, td:first-child {
+      text-align: right;
+      font-weight: bold;
+    }
+
+    th, td {
+      text-align: center;
+    }
+
+    td.starter, th.starter {
+      font-size: 125%;
+    }
+
+    td.premium, th.premium {
+      font-size: 150%;
+    }
+
+    td {
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      img {
+        text-align: center;
+      }
+    }
+
+    tr.purchase {
+      .login-with {
+        line-height: 43px;
+
+        span {
+          font-size: 110%;
+        }
+
+        a {
+          padding: 2px 3px 2px 3px
+        }
+      }
+
+      td.starter {
+        a {
+          margin-top: 7px;
+        }
+      }
+    }
+  }
+}
+
+#prep_starter, #prep_premium {
+  .btn {
+    vertical-align: bottom;
+  }
+}

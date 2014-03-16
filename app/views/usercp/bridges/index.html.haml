@@ -1,0 +1,53 @@
+.row
+  .span12
+    %h3.header= t(".bridge_index")
+
+- if @bridges.empty?
+  .row
+    .span12
+      .alert.alert-block
+        .close{"data-dismiss" => :alert} x
+        %h4= t(".no_bridges_found")
+        = linkify_text(t(".add_a_bridge"), new_usercp_bridge_path)
+
+- else
+  .row
+    .span12
+      %table.table.table-hover.table-striped.table-bordered
+        %thead
+          %tr
+            %th= t(".name")
+            %th= t(".local_ip")
+            %th= t(".mac")
+            %th.center= t(".bridge_software")
+            %th.center= t(".lights")
+            %th.center= t(".resync")
+            %th.center= t(".edit")
+            -#%th= t(".delete")
+
+        %tbody
+          - @bridges.each do |bridge|
+            %tr
+              %td= bridge.name
+              %td= bridge.local_ip_text
+              %td= bridge.mac_text
+              %td.center
+                - if bridge.update_state == Bridge::UPDATE_AVAILABLE
+                  -#%a.btn.btn-mini.btn-success{:href => update_software_usercp_bridge_path(bridge._id), "data-tooltip" => t(".update_available")}
+                  -#  Update
+                  %span.text-success= t(".update_short")
+                - elsif bridge.update_state == Bridge::UPDATING
+                  %span.text-success= t(".updating")
+                - else
+                  v#{bridge.swversion}
+              %td.center= t("lights", :count => bridge.lights.length)
+              %td.center
+                - if bridge.manually_resynced?
+                  %span.text-error.tt{:title => t(".resync_used_desc", :time => current_user.formatted_time(bridge.next_update_at, false))}
+                    = t(".resync_used")
+                    [?]
+                - else
+                  = link_to(t(".resync"), resync_usercp_bridge_path(bridge._id), :class => "btn btn-primary btn-mini tt resync", :title => t(".manual_resync"), "data-loading-text" => t(".resyncing"))
+
+              %td.center= link_to(t(".edit"), edit_usercp_bridge_path(bridge._id), :class => "btn btn-success btn-mini")
+              -#%td.center= link_to(t(".delete"), confirm_destroy_usercp_bridge_path(bridge._id), :class => "btn btn-danger btn-small")

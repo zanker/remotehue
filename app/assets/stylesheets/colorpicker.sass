@@ -1,0 +1,59 @@
+@import "compass/css3"
+
+.colorpicker
+  .pointer
+    position: relative
+    float: left
+    height: 12px
+    width: 12px
+    border: 1px solid black
+    +border-radius(6px)
+
+    .inner-border
+      height: 8px
+      width: 8px
+      border: 2px solid white
+      +border-radius(6px)
+
+  .draggable
+    border: 1px solid black
+    width: 80%
+    cursor: crosshair
+
+  .colors
+    border: 1px solid black
+    display: inline-block
+    width: 256px
+
+    .ct
+      background: image-url("ct.png") no-repeat
+      background-size: 256px 64px
+      height: 64px
+      width: 256px
+      border-bottom: 1px solid black
+
+    .hs
+      background: image-url("hs.png") no-repeat
+      background-size: 256px 256px
+      height: 200px
+      width: 256px
+
+  .bri-container
+    width: 74px
+    height: 256px
+    display: inline-block
+    margin-left: 8px
+    vertical-align: top
+
+    .bri
+      height: 265px
+      border: 1px solid black
+      background: image-url("bri.png") no-repeat
+      background-size: 64px 265px
+
+      .pointer
+        width: 74px
+        height: 10px
+        .inner-border
+          width: 70px
+          height: 6px

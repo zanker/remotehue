@@ -1,0 +1,9 @@
+= yield
+= "\n"
+= "\n"
+\-----
+= "\n"
+Issues? Comments? Questions? Send us an email #{CONFIG[:contact][:email]}, or @#{CONFIG[:contact][:twitter]}.
+- if @unsubscribable
+  = "\n"
+  Don't want to receive these emails anymore? Just go to #{user_unsubscribe_url(:user_id => @user._id, :email_token => @user.email_token)} to unsubscribe, no fuss.

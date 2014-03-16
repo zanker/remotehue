@@ -1,0 +1,28 @@
+en:
+  layouts:
+    application:
+      account: Account
+      logout: Logout
+      contact: Contact
+      settings: Settings
+      bridge_management: Bridges
+      triggers: Triggers
+      view: View
+      create: Create
+      add: Add
+      noscript: Please enable Javascript to properly use the control panel. If you have any questions, you can contact us at %{email}.
+      bridges: Bridges
+      scenes: Scenes
+      billing: Billing
+      login_with: Login With
+      twitter: Twitter
+      contact_us: Contact Us
+      terms: Terms
+      privacy_policy: Privacy Policy
+      bridges: Bridges
+      schedules: Schedules
+      remotehue: Remote Hue
+      subscription_plans: Subscription Plans
+
+
+

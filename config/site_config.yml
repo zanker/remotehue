@@ -1,0 +1,94 @@
+---
+base: &base
+  domain: localhost:4000
+  full_domain: http://localhost:4000
+  mixpanel: 1234
+  mailgun_secret: 1234
+  fastspring:
+    username: 1234
+    password: 1234
+
+  fastspring_secret: 1234
+  fastspring_keys:
+    sub_activated: 1234
+    sub_canceled: 1234
+    sub_changed: 1234
+    sub_failed: 1234
+    sub_refund: 1234
+    order_notification: 1234
+
+  ifttt_pin: empty
+  # Secret for API Keys that we generate to make them consistent
+  bridge_secret: 1234
+
+  limit:
+    schedule_triggers: 3
+    trigger_history: 10
+    schedule_history: 10
+
+  contact:
+    email: empty
+
+  mailgun:
+    username: empty
+    password: empty
+    
+  stripe:
+    webhook_key: empty
+
+  oauth:
+    facebook:
+      key: 'empty'
+      secret: 'empty'
+
+    google:
+      key: 'empty'
+      secret: 'empty'
+
+  sub_plans:
+    - free
+    - starter
+    - premium
+
+  subscriptions:
+    free:
+      tier: 0
+      features:
+        triggers: 30
+        api: false
+        ifttt: true
+
+    starter:
+      trial_period: 15
+      monthly: 3
+      tier: 1
+      url: empty
+
+      features:
+        triggers: 100
+        api: true
+        ifttt: true
+        schedules: true
+
+    premium:
+      trial_period: 15
+      monthly: 5
+      tier: 2
+      url: empty
+
+      features:
+        triggers: 300
+        api: true
+        ifttt: true
+        schedules: true
+
+development: &development
+  <<: *base
+
+test: &test
+  <<: *base
+
+production: &production
+  <<: *base
+  domain: remotehue.com
+  full_domain: https://www.remotehue.com

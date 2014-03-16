@@ -1,0 +1,14 @@
+.control-group
+  = label_tag(:trigger_color, t("usercp.triggers.manage.color_bri"), :class => "control-label")
+  .controls
+    .colorpicker{"data-color" => color.to_json(:except => [:id, :on, :_type, :transitiontime])}
+      .colors.draggable
+        .pointer
+          .inner-border
+        .ct
+        .hs
+
+      .bri-container
+        .bri.draggable
+          .pointer
+            .inner-border

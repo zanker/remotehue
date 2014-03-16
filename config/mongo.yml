@@ -1,0 +1,15 @@
+defaults: &defaults
+  host: 127.0.0.1
+  port: 27017
+
+development:
+  <<: *defaults
+  database: remotehue_development
+
+test:
+  <<: *defaults
+  database: remotehue_test
+
+production: &production
+  <<: *defaults
+  database: remotehue_production

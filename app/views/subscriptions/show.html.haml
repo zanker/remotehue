@@ -1,0 +1,107 @@
+.row
+  .span12
+    %h3.header= t(".subscriptions")
+
+.row
+  .span12
+    %p.lead
+      != t(".sub_desc", :free => content_tag(:strong, t(".days_free", :days => CONFIG[:subscriptions][:starter][:trial_period])))
+
+.row
+  .span9
+    %table.table.table-striped.table-bordered
+      %thead
+        %tr
+          %th &nbsp;
+          %th.free= t("sub_plans.free")
+
+          %th.starter= t("sub_plans.starter")
+
+          %th.premium= t("sub_plans.premium")
+
+      %tbody
+        %tr
+          %td= t(".monthly_price")
+          %td= t(".free_excited")
+          %td.starter= content_tag(:strong, number_to_currency(CONFIG[:subscriptions][:starter][:monthly], :precision => 0))
+          %td.premium= content_tag(:strong, number_to_currency(CONFIG[:subscriptions][:premium][:monthly], :precision => 0))
+
+        - [:triggers].each do |key|
+          %tr
+            %td.feature.tt{:title => t(".features.#{key}.desc")}
+              %span.align= t(".features.#{key}.name")
+              %i.icon-question-sign
+            - CONFIG[:sub_plans].each do |plan|
+              %td{:class => plan}
+                - if CONFIG[:subscriptions][plan][:features][key] == -1
+                  = t(".unlimited")
+                - else
+                  = number_with_delimiter(CONFIG[:subscriptions][plan][:features][key])
+
+        - [:ifttt, :schedules, :api].each do |key|
+          %tr
+            %td.feature.tt{:title => t(".features.#{key}.desc")}
+              %span.align= t(".features.#{key}.name")
+              %i.icon-question-sign
+            - CONFIG[:sub_plans].each do |plan|
+              %td{:class => plan}
+                = CONFIG[:subscriptions][plan][:features][key] ? image_tag("check.png", :size => "18x14") : image_tag("cross.png", :size => "14x14")
+
+        -#%tr.purchase
+        -#  %td
+        -#  %td
+        -#    .login-with
+        -#      %span= t(".login_with")
+        -#      %a.btn.btn-mini.google-free{:href => "/sessions/google", :title => t("providers.google")}
+        -#        .google.size-19
+        -#      %span= t(".or")
+        -#      %a.btn.btn-mini.facebook-free{:href => "/sessions/facebook", :title => t("providers.facebook")}
+        -#        .facebook.size-19
+        -#  %td.starter
+        -#    - if user_signed_in?
+        -#      %a.btn.btn-info{:href => "#", "data-target" => "#prep_starter", "data-toggle" => "modal"}
+        -#        = t(".purchase")
+        -#    - else
+        -#      %a.btn.btn-info{:href => CONFIG[:subscriptions][:starter][:url] % user._id.to_s}
+        -#        = t(".purchase")
+        -#
+        -#  %td.premium
+        -#    - if user_signed_in?
+        -#      %a.btn.btn-info{:href => "#", "data-target" => "#prep_premium", "data-toggle" => "modal"}
+        -#        = t(".purchase")
+        -#    - else
+        -#      %a.btn.btn-info{:href => CONFIG[:subscriptions][:premium][:url] % user._id.to_s}
+        -#        = t(".purchase")
+
+
+.modal.hidden#prep_starter
+  .modal-header
+    %h3= t(".login_auth")
+
+  .modal-body
+    %p!= t(".redirect_purchase", :type => content_tag(:strong, t("sub_plans.starter")))
+    %p= t(".take_a_minute")
+
+  .modal-footer
+    %a.btn.pull-left#google-starter{:href => "/sessions/google?origin=starter"}
+      .google.size-16
+      = t(".google_login")
+    %a.btn.pull-right#facebook-starter{:href => "/sessions/facebook?origin=starter"}
+      .facebook.size-16
+      = t(".facebook_login")
+
+.modal.hidden#prep_premium
+  .modal-header
+    %h3= t(".login_auth")
+
+  .modal-body
+    %p!= t(".redirect_purchase", :type => content_tag(:strong, t("sub_plans.premium")))
+    %p= t(".take_a_minute")
+
+  .modal-footer
+    %a.btn.pull-left#google-premium{:href => "/sessions/google?origin=premium"}
+      .google.size-16
+      = t(".google_login")
+    %a.btn.pull-right#facebook-premium{:href => "/sessions/facebook?origin=premium"}
+      .facebook.size-16
+      = t(".facebook_login")

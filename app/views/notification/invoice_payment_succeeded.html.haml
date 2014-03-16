@@ -1,0 +1,5 @@
+Your #{@user.stripe_card["type"]} ending in #{@user.stripe_card["last4"]} (exp #{@user.stripe_card["exp_month"]}/#{@user.stripe_card["exp_year"]}) has been charged #{number_to_currency(@event_data["total"])} for your subscription.
+%br
+If you have any questions, don't hesitate to contact us at #{mail_to(CONFIG[:contact][:email])}.
+%br
+If you need to make any changes to your subscription or credit card, see the #{link_to("billing page", billing_url)}.

@@ -1,0 +1,24 @@
+en:
+  usercp:
+    bridges:
+      index:
+        bridge_index: Bridge Management
+        name: Name
+        local_ip: Local IP
+        mac: MAC
+        bridge_software: Bridge Software
+        devices: Devices
+        lights: Lights
+        update_available: A software update is available for your Philips Hue Bridge
+        edit: Edit
+        no_bridges_found: No Bridges Found
+        add_a_bridge: Remote Hue requires a Hue Bridge to be associated to your account, {click here} to get started.
+        updating: Updating...
+        update_short: Update Available
+        resync: Resync
+        resync_desc: Updates your bridge info from the server
+        resync_used: Resync Used
+        manual_resync: You can maunally resync your bridge once every 24 hours to force an update ahead of schedule.
+        resync_used_desc: You already resynced your bridge. You need to wait for the next automatic sync at %{time} before you can manually resync again.
+        resyncing: Resyncing...
+        bridge_resynced: Bridge %{name} resynced!

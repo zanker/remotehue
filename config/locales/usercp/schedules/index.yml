@@ -1,0 +1,36 @@
+en:
+  usercp:
+    schedules:
+      index:
+        schedule_index: Schedule Management
+        no_schedules_found: No Schedules Found
+        add_a_schedule: Schedule your lights to turn on or off on a recurring basis, no desktop client needed! {Click here} to get started.
+        edit: Edit
+        delete: Delete
+        name: Name
+        type: Runs By
+        days: Days
+        disabled: Disabled
+        every_day: Daily
+        last_schedules: Last %{count} Runs
+        history: History
+
+
+        day_list:
+          "1": Mon
+          "2": Tue
+          "3": Wed
+          "4": Thur
+          "5": Fri
+          "6": Sat
+          "7": Sun
+        time_types:
+          "0": Time
+          "1": Sunrise
+          "2": Sunset
+
+        js:
+          are_you_sure: Are you sure?
+          confirm_delete: Deleting this schedule cannot be undone and it will stop running immediately.
+          deleting: Deleting...
+          loading: Loading...

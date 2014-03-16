@@ -1,0 +1,60 @@
+en:
+  usercp:
+    help:
+      ifttt:
+        ifttt_setup: IFTTT Setup
+        step: Step %{number}
+        remotehue_id: RemoteHue ID
+
+        skip_intro: If you already know how to setup a recipe on IFTTT, you can skip this setup guide.
+        enter_id: "The RemoteHue ID for \"%{name}\" is:"
+
+        step_1:
+          create_ifttt_account: You need to first {login} to IFTTT or {create an account}.
+        step_2:
+          active: For IFTTT to work with Remote Hue, you need to setup the email channel. {Click here} to get started
+          enter: Once you're on the page, enter "bot@remotehue.com" and click "Send PIN"
+          activate: Next, you will need to enter the PIN to confirm access. Enter %{pin} and click "Activate"
+          done: You're done setting up the channel, you can move onto the next step.
+        step_3:
+          select_create: Click {create} on the header of IFTTT to get started
+          select_this: Click "this" on the create page
+          recipes: Channel are the trigger for an event in IFTTT. For this example, will create a recipe that activates whenever the wind blows more than 10 MPH
+          future: Later, you can create any IFTTT recipe you want using the same steps outlined here, but with different channels.
+          select_weather: Scroll down and select "weather"
+          done: Now onward to setting up the event, just click "next".
+        step_4:
+          event: Each channel has various events they respond to for when to activate.
+          wind: We're going to be using the wind speed in this example, click "Wind speed rises above"
+          speed: For wind speed, enter "10" and then click "Create Trigger"
+          done: You've now configured your first channel! Next, we need to set it up so RemoteHue is notified when the channel triggers, click "next".
+
+        step_5:
+          push: RemoteHue communicates with IFTTT using the email channel. To get started, click "that"
+          select: Click "Email" to configure the action channel
+          select_always: You will always use the Email channel when you want an IFTTT trigger to change your Hue lights
+          action: Select the "Send me an email" action
+          subject: You can leave the "Subject" as is, it has no effect on the RemoteHue trigger.
+          trigger: "You're almost done, all you need to do now is enter the RemoteHue ID for \"%{name}\" in the \"Body\":"
+          select_action: Just click "Create Action"
+          create_recipe: Now click "Create Recipe"
+          wrap_up: You're done! Click "next" for more info on IFTTT and for support.
+
+        step_6:
+          support: If you have any further questions or run into any issues, you can {contact us} for help.
+          ifttt: IFTTT offers a wide variety of channels allowing you to do anything from flashing a light when your {WeMo Motion} detects movement to turning your lights off {using a text message}.
+          remotehue: RemoteHue works with any IFTTT channel, giving you full access to the capabilities of your Philips Hue lights.
+          future: In the future, you can grab the RemoteHue ID from the notice at the top of this page, no need to go through the setup guide again.
+
+
+
+        next: Next
+        back: Back
+
+        titles:
+          "1": Login to IFTTT
+          "2": Activate Channel
+          "3": Select a Recipe
+          "4": Setup an Event
+          "5": Setup Action
+          "6": Done!

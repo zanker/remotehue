@@ -1,0 +1,63 @@
+.row
+  .span12
+    %h3.header= t(".schedule_index")
+
+- if @schedules.empty?
+  .row
+    .span12
+      .alert.alert-block
+        .close{"data-dismiss" => :alert} x
+        %h4= t(".no_schedules_found")
+        = linkify_text(t(".add_a_schedule"), new_usercp_schedule_path)
+
+- else
+  .row
+    .span12
+      %table.table.table-hover.table-striped.table-bordered
+        %thead
+          %tr
+            %th= t(".name")
+            %th.center= t(".type")
+            %th.center= t(".days")
+            %th.center= t(".next_run")
+            %th.center= t(".history")
+            %th.center= t(".edit")
+            %th.center= t(".delete")
+
+        %tbody
+          - @schedules.each do |schedule|
+            %tr
+              %td
+                - if schedule.enabled?
+                  %span.text-success= schedule.name
+                - else
+                  %span.text-error= schedule.name
+
+              %td.center= t(".time_types.#{schedule.mode}")
+              %td.center
+                - if schedule.days.length == 7
+                  = t(".every_day")
+                - else
+                  = schedule.days.map {|d| t(".day_list.#{d}")}.join(", ")
+
+              %td.center
+                - if !schedule.enabled?
+                  = t(".disabled")
+                - else
+                  = current_user.formatted_time(schedule.next_run_at)
+
+              %td.center= link_to(t(".history"), history_usercp_schedule_path(schedule._id), :class => "btn btn-inverse btn-mini history")
+              %td.center= link_to(t(".edit"), edit_usercp_schedule_path(schedule._id), :class => "btn btn-success btn-mini")
+              %td.center= link_to(t(".delete"), usercp_schedule_path(schedule._id), :class => "btn btn-danger btn-mini delete")
+
+
+#schedule-history.modal.hidden
+  .modal-header
+    %h3
+      = t(".last_schedules", :count => CONFIG[:limit][:schedule_history])
+      .close{"data-dismiss" => "modal"} x
+  .modal-body
+    = image_tag("loading.gif")
+    %strong= t("js.loading")
+  .modal-footer
+    %a.btn.pull-left.btn{:href => "#", "data-dismiss" => "modal"}= t("js.close")

@@ -1,0 +1,25 @@
+en:
+  home:
+    show:
+      unlock_full: Unlock the full functionality of your Philips Hue Lights with Remote Hue
+      ifttt_scheduler: Remote Hue adds full {IFTTT} integration and recurring scheduling! No 3rd party program required.
+      plans_offered: Remote Hue starts at only %{price}/month with a %{days} free trial, check out our {subscription plans} for more info.
+      free_offered: Not ready to upgrade? You can also try out our {free plan}, no credit card required.
+
+      ifttt:
+        title: IFTTT Integration
+        any_channel: Integrate your Hue Lights with any channel on {IFTTT}. Such as changing lights based on weather, text message, or even a WeMo Motion Sensor.
+
+      remote:
+        title: Fully Remote
+        access: Remote Hue doesn't require any third party programs to run. Your schedulers and IFTTT integrations will always run even if your computers are off.
+
+      scheduler:
+        title: Recurring Scheduling
+        full: Want your lights to turn on when the sun sets, or maybe gradually fade in your lights when you have to wake up for work.
+        can_do: Recurring schedules are fully supported and can be ran based on set times, sunrise, sunset and you can control what days of the week they run.
+
+      api:
+        title: API Support
+        expand: Want to integrate other software with Philips Hue? We offer an easy to use API to let you trigger your lights whenever you want, with whatever you want.
+

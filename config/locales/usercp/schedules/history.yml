@@ -1,0 +1,16 @@
+en:
+  usercp:
+    schedules:
+      history:
+        results: Results
+        created_at: Time
+
+        result_types:
+          "0": Success
+          "1": Error
+          "2": Overdue
+
+        result_types_desc:
+          "0": Schedule ran without any issues
+          "1": An error occurred while running the scheudle
+          "2": The schedule was too far behind and wasn't ran

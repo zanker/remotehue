@@ -1,0 +1,5 @@
+We were unable to charge your #{@user.stripe_card["type"]} ending in #{@user.stripe_card["last4"]} (exp #{@user.stripe_card["exp_month"]}/#{@user.stripe_card["exp_year"]}) for your subscription.
+%br
+We will try up to 3 times to charge you before the subscription is canceled. If you have any questions, don't hesitate to contact us at #{mail_to(CONFIG[:contact][:email])}.
+%br
+If you need to fix your credit card, you can visit the #{link_to("billing page", billing_url)}.

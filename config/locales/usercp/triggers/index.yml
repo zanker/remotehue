@@ -1,0 +1,21 @@
+en:
+  usercp:
+    triggers:
+      index:
+        triggers_index: Trigger Management
+        no_triggers_found: No Triggers Found
+        add_a_trigger: You need to {add a trigger} before you can take full advantage of Remote Hue.
+        edit: Edit
+        delete: Delete
+        ifttt_setup: Setup IFTTT
+        api_setup: API Info
+        api_usage: API Usage
+        regenerate: Regenerate Secret
+        regenerating: Regenerating...
+        last_triggers: Last %{count} Triggers
+
+        js:
+          are_you_sure: Are you sure?
+          confirm_delete: Deleting this trigger cannot be undone, anything that uses this trigger will stop working immediately.
+          deleting: Deleting...
+          regenerate_confirm: Are you sure? Any existing triggers for this URL will need to be updated.

@@ -1,0 +1,18 @@
+- bridges = current_user.bridges {|b| b[:name]}
+.control-group
+  = label_tag(:trigger_lights, t("usercp.triggers.manage.lights"), :class => "control-label")
+  .controls
+    %select.select-xlarge{:id => "trigger_lights", :name => "trigger[lights]", :multiple => true}
+      - bridges.each do |bridge|
+        %optgroup{:label => bridge.name}
+          - bridge.lights.each do |light|
+            %option{:value => "#{bridge._id}_#{light._id}", "data-color" => light.color?, :selected => active_lights[bridge._id] && active_lights[bridge._id][light._id]}= light.name
+
+.control-group
+  = label_tag(:trigger_groups, t("usercp.triggers.manage.groups"), :class => "control-label")
+  .controls
+    %select.select-xlarge{:id => "trigger_groups", :name => "trigger[groups]", :multiple => true}
+      - bridges.each do |bridge|
+        %optgroup{:label => bridge.name}
+          - bridge.groups.each do |group|
+            %option{:value => "#{bridge._id}_#{group._id}", :selected => active_groups[bridge._id] && active_groups[bridge._id][group._id]}= group.name

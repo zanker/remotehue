@@ -1,0 +1,20 @@
+---
+:bri:
+  :min: 0
+  :max: 254
+
+:hue:
+  :min: 0
+  :max: 65535
+  :base: 182.02
+
+:sat:
+  :min: 0
+  :max: 254
+
+:ct:
+  :min: 154
+  :max: 500
+
+:transitiontime:
+  :min: 0

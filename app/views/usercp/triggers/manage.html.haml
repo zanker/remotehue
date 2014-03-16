@@ -1,0 +1,65 @@
+.row
+  .span12
+    %h3.header= @trigger.new_record? ? t(".add_a_trigger") : t(".editing_trigger", :name => @trigger.name)
+
+.row
+  .span12
+    #error-list
+    = form_for @trigger, :url => {:action => @trigger.new_record? ? :create : :update}, :html => {:class => "form-horizontal"} do |f|
+      .control-group
+        = label_tag("trigger[name]", t(".name"), :class => "control-label")
+        .controls
+          = text_field_tag("trigger[name]", @trigger.name, :placeholder => "Flash office lights", :class => "input-medium")
+          %span.help-inline
+
+      .control-group
+        = label_tag("trigger[transitiontime]", t(".transitiontime"), :class => "control-label")
+        .controls
+          = select_tag("trigger[transitiontime]", options_for_select(transitiontime_list, :selected => @trigger.respond_to?(:color) && @trigger.color && @trigger.color.transitiontime || 0), :class => "input-medium")
+          %span.help-inline= t(".transitiontime_desc")
+
+      .tabbable.tabs-left
+        %ul.nav.nav-tabs
+          %li{:class => (@trigger.new_record? || @trigger.instance_of?(Trigger::Flash)) ? :active : nil}= link_to(t(".flash_lights"), "#flash")
+          -#%li{:class => @trigger.instance_of?(Trigger::Scene) ? :active : nil}= link_to(t(".run_scene"), "#scene")
+          %li{:class => @trigger.instance_of?(Trigger::Off) ? :active : nil}= link_to(t(".lights_off"), "#off")
+          %li{:class => @trigger.instance_of?(Trigger::On) ? :active : nil}= link_to(t(".lights_on"), "#on")
+
+        .tab-content
+          .tab-pane#flash
+            .control-group
+              = label_tag("trigger[duration]", t(".duration"), :class => "control-label")
+              .controls
+                = select_tag("trigger[duration]", options_for_select([[t(".once"), 0], [t(".flash_seconds", :seconds => 30), 30]], :selected => @trigger.respond_to?(:duration) ? @trigger.duration : 0), :class => "input-medium")
+                %span.help-inline
+
+            = render :partial => "lights", :locals => {:active_lights => @active_lights, :active_groups => @active_groups}
+            = render :partial => "color", :locals => {:color => @trigger.respond_to?(:color) && @trigger.color, :fallback_color => @trigger.respond_to?(:fallback_color) && @trigger.fallback_color}
+
+          .tab-pane#scene
+
+          .tab-pane#off
+            = render :partial => "lights", :locals => {:active_lights => @active_lights, :active_groups => @active_groups}
+
+          .tab-pane#on
+            = render :partial => "lights", :locals => {:active_lights => @active_lights, :active_groups => @active_groups}
+            = render :partial => "color", :locals => {:color => @trigger.respond_to?(:color) && @trigger.color, :fallback_color => @trigger.respond_to?(:fallback_color) && @trigger.fallback_color}
+
+      - secondary_triggers = Trigger.where(:user_id => current_user._id, :_id.ne => @trigger._id).sort(:name).only(:name).map {|t| [t.name, t._id]}
+      - if secondary_triggers
+        .control-group#secondary_disclaimer
+          %p= t(".only_run_on_api_mailgun")
+
+      .control-group
+        = label_tag("trigger[secondary_trigger_id]", t(".secondary_trigger"), :class => "control-label")
+        .controls
+          = select_tag("trigger[secondary_trigger_id]", options_for_select(secondary_triggers.empty? ? [[t(".no_triggers_found"), ""]] : [[t(".dont_run_secondary"), ""]].concat(secondary_triggers), :selected => @trigger.secondary_trigger_id), :disabled => secondary_triggers.empty?, :class => "input-medium")
+          %span.help-inline{"data-this-one" => t(".this_one")}= t(".secondary_trigger_desc")
+
+      .control-group
+        = label_tag("trigger[secondary_delay]", t(".secondary_delay"), :class => "control-label")
+        .controls
+          = select_tag("trigger[secondary_delay]", options_for_select([[t(".after_seconds", :seconds => 15), 15], [t(".after_seconds", :seconds => 30), 30], [t(".after_seconds", :seconds => 45), 45], [t(".after_seconds", :seconds => 60), 60],[t(".after_minutes", :minutes => 5), 300], [t(".after_minutes", :minutes => 10), 600]], :selected => @trigger.secondary_delay), :disabled => secondary_triggers.empty?, :class => "input-medium")
+          %span.help-inline= t(".secondary_delay_desc")
+
+      %input.btn.btn-success{:type => :submit, :value => @trigger.new_record? ? t(".create") : t(".update"), "data-loading-text" => @trigger.new_record? ? t(".creating") : t(".updating")}

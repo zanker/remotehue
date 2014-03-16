@@ -1,0 +1,21 @@
+%table.table.table-hover.table-striped.table-bordered
+  %thead
+    %tr
+      %th.center= t(".results")
+      %th= t(".created_at")
+
+  %tbody
+    - if @history.empty?
+      %tr
+        %td{:colspan => 2}= t(".not_ran_yet", :name => @schedule.name)
+
+    - else
+      - @history.each do |row|
+        %tr
+          %td.center
+            = t(".result_types.#{row.results}")
+            %a.tt{"title" => t(".result_types_desc.#{row.results}"), :href => "#"} [?]
+          %td= current_user.formatted_time(row.created_at)
+
+:javascript
+  $("#schedule-history .tt").tooltip();
